@@ -28,11 +28,10 @@ modules:
     repos:
       copr:
         - yalter/niri
-        - zhangyi6324/noctalia-shell
     install:
       packages:
         - niri                     # Wayland Compositor
-        - noctalia-shell           # Desktop Shell
+        - noctalia                 # Desktop Shell (v5, official Fedora package)
         - noctalia-greeter         # Native Noctalia Greeter for greetd
         - xwayland-satellite       # XWayland bridge for legacy apps
         - xdg-desktop-portal-gnome # Screen sharing & file pickers

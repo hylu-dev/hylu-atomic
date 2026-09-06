@@ -72,7 +72,7 @@ layout {
     center-focused-column "never"
 }
 
-include "~/.config/niri/noctalia.kdl"
+include optional=true "~/.config/niri/noctalia.kdl"
 
 cursor {
     xcursor-theme "default"
@@ -230,6 +230,7 @@ binds {
 switch-events { lid-close { spawn "noctalia" "msg" "session" "lock"; }; }
 
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE"
+spawn-at-startup "noctalia"
 
 window-rule {
     match app-id="chrome$" title="^Picture-in-Picture$"
