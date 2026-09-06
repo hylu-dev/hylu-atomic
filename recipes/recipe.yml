@@ -38,9 +38,13 @@ modules:
         - greetd                   # Login daemon
         - foot                     # Terminal emulator
         - nautilus                 # File Manager
+        - nix-core                 # Rootless Nix (store under ~/.local/share/nix, no /nix needed) — the Determinate installer's ostree support is currently broken by Fedora 42+'s composefs changes, so Nix has to be baked in at build time instead
+        - nix-legacy               # Symlinks for classic nix-* commands (nix-env, nix-build, etc.) — needed by home-manager
     remove:
       packages:
         - firefox                  # Remove base RPM Firefox
+        - alacritty                # Remove niri's recommended terminal (using foot instead)
+        - waybar                   # Remove niri's recommended bar (using Noctalia instead)
 
   # Enable system services
   - type: systemd
