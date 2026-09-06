@@ -1,45 +1,51 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
-name: template
-# description will be included in the image's metadata
-description: This is my personal OS image.
+name: hylu-atomic
+description: Minimal Fedora Atomic image with Niri, Noctalia Shell, and Noctalia Greeter for Nvidia hardware
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: latest # You can pin to a specific version of Fedora as well
+base-image: ghcr.io/ublue-os/nvidia-main
+image-version: latest
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
+  # Copy local configuration files into root /
   - type: files
     files:
       - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        destination: /
 
+  # Install system binaries from COPR and DNF
   - type: dnf
     repos:
       copr:
-        - atim/starship
+        - yalter/niri
+        - zhangyi6324/noctalia-shell
     install:
       packages:
-        - micro
-        - starship
+        - niri                     # Wayland Compositor
+        - noctalia-shell           # Desktop Shell
+        - noctalia-greeter         # Native Noctalia Greeter for greetd
+        - xwayland-satellite       # XWayland bridge for legacy apps
+        - xdg-desktop-portal-gnome # Screen sharing & file pickers
+        - greetd                   # Login daemon
+        - foot                     # Terminal emulator
+        - nautilus                 # File Manager
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - firefox                  # Remove base RPM Firefox
 
+  # Enable system services
+  - type: systemd
+    system:
+      enabled:
+        - greetd
+
+  # Flatpak configuration
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+        install:
+          - com.google.Chrome
+      - scope: user
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  # Cosign policy and image signature verification
+  - type: signing

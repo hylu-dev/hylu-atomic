@@ -1,0 +1,4 @@
+[default_session]
+
+command = "noctalia-greeter-session"
+user = "greeter"
