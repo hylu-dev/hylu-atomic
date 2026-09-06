@@ -12,6 +12,12 @@ modules:
       - source: system
         destination: /
 
+  # Install Nvidia drivers (open kernel modules, Turing and later)
+  - type: akmods
+    base: main
+    install: []
+    nvidia-driver: nvidia-open
+
   # Install Terra repository
   - type: script
     snippets:
