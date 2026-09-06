@@ -2,7 +2,7 @@
 name: hylu-atomic
 description: Minimal Fedora Atomic image with Niri, Noctalia Shell, and Noctalia Greeter for Nvidia hardware
 
-base-image: ghcr.io/ublue-os/nvidia-main
+base-image: ghcr.io/ublue-os/base-main
 image-version: latest
 
 modules:
@@ -11,6 +11,11 @@ modules:
     files:
       - source: system
         destination: /
+
+  # Install Terra repository
+  - type: script
+    snippets:
+      - "dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra44' terra-release"
 
   # Install system binaries from COPR and DNF
   - type: dnf
