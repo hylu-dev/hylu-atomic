@@ -1,0 +1,17 @@
+# The image's /nix is read-only (composefs), so bind a writable directory
+# from /var over it. The store has to live at the literal path /nix/store:
+# Nix refuses a symlinked /nix, and without /nix it falls back to a chroot
+# store whose profiles only work inside `nix shell`.
+[Unit]
+Description=Nix store (bind mount from /var/lib/nix)
+Requires=nix-var-dir.service
+After=nix-var-dir.service
+
+[Mount]
+What=/var/lib/nix
+Where=/nix
+Type=none
+Options=bind
+
+[Install]
+WantedBy=local-fs.target

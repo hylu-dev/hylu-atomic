@@ -38,8 +38,9 @@ modules:
         - greetd                   # Login daemon
         - foot                     # Terminal emulator
         - nautilus                 # File Manager
-        - nix-core                 # Rootless Nix (store under ~/.local/share/nix, no /nix needed) — the Determinate installer's ostree support is currently broken by Fedora 42+'s composefs changes, so Nix has to be baked in at build time instead
-        - nix-legacy               # Symlinks for classic nix-* commands (nix-env, nix-build, etc.) — needed by home-manager
+        - nix                      # Multi-user Nix; /nix is bind-mounted from /var/lib/nix (see nix.mount) since the Determinate installer's ostree support is broken by composefs
+        - nix-daemon               # Only a Recommends of nix, so list it explicitly
+        - nix-legacy               # Classic nix-* commands (nix-env, nix-build, etc.), needed by home-manager
     remove:
       packages:
         - firefox                  # Remove base RPM Firefox
@@ -51,6 +52,8 @@ modules:
     system:
       enabled:
         - greetd
+        - nix.mount
+        - nix-daemon.socket
 
   # Flatpak configuration
   - type: default-flatpaks

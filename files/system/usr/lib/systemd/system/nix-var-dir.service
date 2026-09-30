@@ -1,0 +1,12 @@
+# nix.mount runs before systemd-tmpfiles-setup, so tmpfiles can't create the
+# bind source in time on first boot.
+[Unit]
+Description=Create /var/lib/nix for the Nix store bind mount
+DefaultDependencies=no
+RequiresMountsFor=/var/lib
+Before=nix.mount
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mkdir -p /var/lib/nix
+RemainAfterExit=yes
