@@ -36,6 +36,7 @@ modules:
         - xwayland-satellite       # XWayland bridge for legacy apps
         - xdg-desktop-portal-gnome # Screen sharing & file pickers
         - greetd                   # Login daemon
+        - gnome-keyring-pam        # Unlocks the login keyring with the greetd password (pam.d/greetd already references it)
         - foot                     # Terminal emulator
         - nautilus                 # File Manager
         - zsh                      # Login shell (configured by hylu-nix)
