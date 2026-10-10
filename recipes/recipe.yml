@@ -38,6 +38,7 @@ modules:
         - greetd                   # Login daemon
         - foot                     # Terminal emulator
         - nautilus                 # File Manager
+        - zsh                      # Login shell (configured by hylu-nix)
         - nix                      # Multi-user Nix; /nix is bind-mounted from /var/lib/nix (see nix.mount) since the Determinate installer's ostree support is broken by composefs
         - nix-daemon               # Only a Recommends of nix, so list it explicitly
         - nix-legacy               # Classic nix-* commands (nix-env, nix-build, etc.), needed by home-manager
@@ -59,6 +60,9 @@ modules:
         - greetd
         - nix.mount
         - nix-daemon.socket
+    user:
+      enabled:
+        - hylu-setup.service       # First-login hylu-nix/home-manager setup
 
   # Flatpak configuration
   - type: default-flatpaks

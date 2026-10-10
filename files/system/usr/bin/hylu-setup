@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Fetch hylu-nix and apply it with home-manager (which also clones hylu-nvim).
+# Runs once on first login via hylu-setup.service; run it by hand to retry.
+set -euo pipefail
+
+repo="$HOME/Repositories/hylu-nix"
+marker="${XDG_STATE_HOME:-$HOME/.local/state}/hylu-setup.done"
+
+fail() {
+  echo "hylu-setup: $*" >&2
+  command -v notify-send >/dev/null &&
+    notify-send -u critical "hylu-setup failed" "$* Run hylu-setup in a terminal to retry."
+  exit 1
+}
+
+# nix-daemon.socket and the network may still be coming up on first boot
+for _ in $(seq 60); do
+  [[ -S /nix/var/nix/daemon-socket/socket ]] && getent hosts github.com >/dev/null && break
+  sleep 2
+done
+[[ -S /nix/var/nix/daemon-socket/socket ]] || fail "nix-daemon socket isn't up."
+
+if [[ ! -d $repo ]]; then
+  mkdir -p "$(dirname "$repo")"
+  GIT_SSH_COMMAND="ssh -o BatchMode=yes" GIT_TERMINAL_PROMPT=0 \
+    git clone git@github.com:hylu-dev/hylu-nix.git "$repo" ||
+    GIT_TERMINAL_PROMPT=0 git clone https://github.com/hylu-dev/hylu-nix.git "$repo" ||
+    fail "Couldn't clone hylu-nix (add a GitHub ssh key if the repo is private)."
+fi
+
+# Build the activation package straight from the flake, so the home-manager
+# version comes from hylu-nix's flake.lock rather than whatever is on PATH.
+activation=$(nix build --no-link --print-out-paths \
+  "$repo#homeConfigurations.$USER.activationPackage") ||
+  fail "Building the home-manager config failed."
+HOME_MANAGER_BACKUP_EXT=hm-backup "$activation/activate" ||
+  fail "Activating the home-manager config failed."
+
+mkdir -p "$(dirname "$marker")"
+touch "$marker"
+echo "hylu-setup: done"

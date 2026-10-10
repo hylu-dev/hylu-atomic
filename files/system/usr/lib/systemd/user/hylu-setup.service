@@ -1,0 +1,13 @@
+[Unit]
+Description=First-login setup of the hylu-nix home-manager config
+# hylu-setup touches this on success; %S is ~/.local/state for user units
+ConditionPathExists=!%S/hylu-setup.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/hylu-setup
+# The first build downloads the whole config
+TimeoutStartSec=1h
+
+[Install]
+WantedBy=default.target
