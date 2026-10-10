@@ -47,6 +47,11 @@ modules:
         - alacritty                # Remove niri's recommended terminal (using foot instead)
         - waybar                   # Remove niri's recommended bar (using Noctalia instead)
 
+  # SELinux labels for /nix, otherwise nix-daemon.socket is denied
+  - type: script
+    scripts:
+      - nix-selinux.sh
+
   # Enable system services
   - type: systemd
     system:
