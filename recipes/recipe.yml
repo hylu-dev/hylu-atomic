@@ -46,6 +46,7 @@ modules:
         - nix-legacy               # Classic nix-* commands (nix-env, nix-build, etc.), needed by home-manager
         - libxkbcommon-x11         # FMOD Studio AppImage (Qt xcb plugin) expects this from the host
         - xcb-util-keysyms         # FMOD Studio AppImage (Qt xcb plugin) expects this from the host
+        - fuse-libs                # libfuse2, so AppImages can run directly without --appimage-extract-and-run
 
   # niri recommends these; Noctalia and foot replace them. This is a separate
   # module so the install step above can't pull them back in as weak deps.
