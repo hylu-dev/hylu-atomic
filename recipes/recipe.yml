@@ -21,7 +21,7 @@ modules:
   # Install Terra repository
   - type: script
     snippets:
-      - "dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra44' terra-release"
+      - "dnf install -y --nogpgcheck --repofrompath \"terra,https://repos.fyralabs.com/terra$(rpm -E %fedora)\" terra-release"
 
   # Install system binaries from COPR and DNF
   - type: dnf
@@ -37,6 +37,7 @@ modules:
         - xdg-desktop-portal-gnome # Screen sharing & file pickers
         - greetd                   # Login daemon
         - gnome-keyring-pam        # Unlocks the login keyring with the greetd password (pam.d/greetd already references it)
+        - gpu-screen-recorder      # Screen recording backend for Noctalia
         - foot                     # Terminal emulator
         - nautilus                 # File Manager
         - zsh                      # Login shell (configured by hylu-nix)
