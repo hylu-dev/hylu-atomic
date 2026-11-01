@@ -139,6 +139,7 @@ default_extent_fraction = 0.5
 "Mod+Period" = "window-consume-right"
 "Mod+Ctrl+Comma" = "window-consume-from-left"
 "Mod+Ctrl+Period" = "window-consume-from-right"
+"Mod+Alt+Space" = { action = "workspace-set-layout toggle", repeat = false }  # custom: cycle scrolling/dwindle/master/stacking
 # Needs layout.mode = "dwindle".
 # "Mod+Alt+T" = "layout-toggle-split"
 "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
