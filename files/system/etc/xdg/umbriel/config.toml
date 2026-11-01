@@ -39,19 +39,15 @@ position = [0, 0]
 position = [1920, 0]
 
 # ==============================================================================
-[appearance]
-border_width = 1
-corner_radius = 20
+# Border width/radius and unfocused color use Umbriel's defaults (2px, radius 10).
+[colors.border]
+focused = "#DDA0DDFF"   # plum
 
 [appearance.shadow]
 enabled = true
 
 [appearance.blur]
 radius = 3
-
-[colors.border]
-focused = "#DDA0DDFF"   # plum
-unfocused = "#505050FF"
 
 # ==============================================================================
 [input.keyboard]
