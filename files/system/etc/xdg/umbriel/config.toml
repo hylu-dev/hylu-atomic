@@ -137,8 +137,8 @@ default_extent_fraction = 0.5
 "Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
 "Mod+P" = { action = "window-toggle-pinned", repeat = false }
 "Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
-"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
-"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
+"Mod+F" = { action = "window-toggle-maximize", repeat = false }       # custom: swapped with Mod+Ctrl+F
+"Mod+Ctrl+F" = { action = "window-toggle-fullscreen", repeat = false }  # custom
 "Mod+R" = "window-cycle-primary-extent"
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
 "Mod+Comma" = "window-consume-left"
@@ -194,6 +194,12 @@ default_extent_fraction = 0.5
 
 # ==============================================================================
 # Window rules
+# Blur behind foot's translucent background (foot.ini sets alpha). Umbriel has no
+# ext-background-effect-v1, so foot's own blur=yes does nothing; blur is per rule.
+[[window_rule]]
+match.app_id = "^foot$"
+blur = true
+
 [[window_rule]]
 match.app_id = "^dev\\.noctalia\\.Noctalia(\\.Settings)?$"
 default_floating = true
