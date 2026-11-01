@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: hylu-atomic
-description: Minimal Fedora Atomic image with Niri, Noctalia Shell, and Noctalia Greeter for Nvidia hardware
+description: Minimal Fedora Atomic image with Umbriel, Noctalia Shell, and Noctalia Greeter for Nvidia hardware
 
 base-image: ghcr.io/ublue-os/base-main
 image-version: latest
@@ -23,19 +23,18 @@ modules:
     snippets:
       - "dnf install -y --nogpgcheck --repofrompath \"terra,https://repos.fyralabs.com/terra$(rpm -E %fedora)\" terra-release"
 
-  # Install system binaries from COPR and DNF
+  # Install system binaries from Terra and Fedora
   - type: dnf
-    repos:
-      copr:
-        - yalter/niri
     install:
       packages:
-        - niri                     # Wayland Compositor
+        - umbriel-nightly          # Wayland compositor (Terra, nightly builds); config in /etc/xdg/umbriel
+        - xdg-desktop-portal-umbriel-nightly # Screencast/screenshot portal + share picker
+        - xdg-desktop-portal-gtk   # File pickers etc. (umbriel-portals.conf: default=umbriel;gtk)
         - noctalia                 # Desktop Shell (v5, official Fedora package)
         - noctalia-greeter         # Native Noctalia Greeter for greetd
         - xwayland-satellite       # XWayland bridge for legacy apps
-        - xdg-desktop-portal-gnome # Screen sharing & file pickers
         - greetd                   # Login daemon
+        - gnome-keyring            # Secret Service (Git Credential Manager etc.)
         - gnome-keyring-pam        # Unlocks the login keyring with the greetd password (pam.d/greetd already references it)
         - gpu-screen-recorder      # Screen recording backend for Noctalia
         - foot                     # Terminal emulator
@@ -49,8 +48,8 @@ modules:
         - libatomic                # FMOD Studio links against libatomic.so.1; not bundled in its AppImage
         - fuse-libs                # libfuse2, so AppImages can run directly without --appimage-extract-and-run
 
-  # niri recommends these; Noctalia and foot replace them. This is a separate
-  # module so the install step above can't pull them back in as weak deps.
+  # Not wanted: Noctalia and foot replace these. Kept as a separate module so the
+  # install step above can't pull them back in as weak deps (absent ones are a no-op).
   - type: dnf
     remove:
       packages:

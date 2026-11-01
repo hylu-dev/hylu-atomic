@@ -1,8 +1,0 @@
-{
-    "rules": [
-        { "pattern": { "feature": "procname", "matches": "niri" }, "profile": "No VidMem Reuse (niri)" }
-    ],
-    "profiles": [
-        { "name": "No VidMem Reuse (niri)", "settings": [ { "key": "GLVidHeapReuseRatio", "value": 0 } ] }
-    ]
-}

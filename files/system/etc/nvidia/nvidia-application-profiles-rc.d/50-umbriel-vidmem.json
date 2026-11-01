@@ -1,0 +1,8 @@
+{
+    "rules": [
+        { "pattern": { "feature": "procname", "matches": "umbriel" }, "profile": "No VidMem Reuse (umbriel)" }
+    ],
+    "profiles": [
+        { "name": "No VidMem Reuse (umbriel)", "settings": [ { "key": "GLVidHeapReuseRatio", "value": 0 } ] }
+    ]
+}

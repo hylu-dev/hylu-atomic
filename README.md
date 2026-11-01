@@ -1,6 +1,6 @@
 # hylu-atomic
 
-A minimal Fedora Atomic image with [Niri](https://github.com/YaLTeR/niri), [Noctalia Shell](https://github.com/noctalia-dev/noctalia), and [Noctalia Greeter](https://github.com/noctalia-dev/noctalia-greeter), built for Nvidia hardware using [BlueBuild](https://blue-build.org/).
+A minimal Fedora Atomic image with [Umbriel](https://docs.noctalia.dev/umbriel/), [Noctalia Shell](https://github.com/noctalia-dev/noctalia), and [Noctalia Greeter](https://github.com/noctalia-dev/noctalia-greeter), built for Nvidia hardware using [BlueBuild](https://blue-build.org/).
 
 Built from [`ghcr.io/ublue-os/base-main`](https://github.com/ublue-os/main), with Nvidia drivers (`nvidia-open`) added via the `akmods` module.
 
