@@ -117,12 +117,12 @@ default_extent_fraction = 0.5
 "Mod+L" = "window-focus-or-output-right"      # custom
 "Mod+F1" = "window-focus-next"
 "Mod+Shift+Left" = "column-move-left"
-"Mod+Shift+Down" = "window-move-down"
-"Mod+Shift+Up" = "window-move-up"
+"Mod+Shift+Down" = "window-move-or-workspace-down"  # custom: next workspace at the edge
+"Mod+Shift+Up" = "window-move-or-workspace-up"      # custom
 "Mod+Shift+Right" = "column-move-right"
 "Mod+Shift+H" = "column-move-left"   # custom
-"Mod+Shift+J" = "window-move-down"   # custom
-"Mod+Shift+K" = "window-move-up"     # custom
+"Mod+Shift+J" = "window-move-or-workspace-down"   # custom
+"Mod+Shift+K" = "window-move-or-workspace-up"     # custom
 "Mod+Shift+L" = "column-move-right"  # custom
 # Monitors (custom)
 "Mod+Ctrl+Left" = "output-focus-left"
