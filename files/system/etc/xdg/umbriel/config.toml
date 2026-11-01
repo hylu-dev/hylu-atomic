@@ -61,6 +61,8 @@ natural_scroll = true
 
 [input.focus]
 follows_mouse = true
+# Hover never scrolls the layout: only fully visible windows take focus on hover.
+follows_mouse_max_scroll = 0.0
 
 [input.cursor]
 follows_focus = true
