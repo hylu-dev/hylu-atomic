@@ -84,6 +84,7 @@ default_extent_fraction = 0.5
 "Mod+Return" = { action = "spawn foot", repeat = false }  # default: kitty (not installed)
 "Mod+E" = { action = "spawn nautilus", repeat = false }   # custom
 "Mod" = "spawn noctalia msg panel-toggle launcher"
+"Mod+D" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }  # custom
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
