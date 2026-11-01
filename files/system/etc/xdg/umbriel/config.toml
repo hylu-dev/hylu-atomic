@@ -89,6 +89,14 @@ default_extent_fraction = 0.5
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+"Mod+Alt+L" = { action = "spawn noctalia msg session lock", repeat = false }  # custom
+
+# Screenshots via Noctalia (Umbriel has no built-in screenshot actions)  # custom
+"Print" = { action = "spawn noctalia msg screenshot-region", repeat = false }
+"Mod+Shift+S" = { action = "spawn noctalia msg screenshot-region", repeat = false }
+"Ctrl+Print" = { action = "spawn noctalia msg screenshot-fullscreen", repeat = false }
+"Shift+Print" = { action = "spawn noctalia msg screenshot-fullscreen all", repeat = false }
+"Alt+Print" = { action = "spawn noctalia msg screenshot-annotate", repeat = false }
 
 # Media, volume and brightness keys from any input device, routed through the
 # Noctalia shell so its OSDs show. Safe while the session is locked.
