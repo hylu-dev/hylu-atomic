@@ -47,6 +47,7 @@ modules:
         - xcb-util-keysyms         # FMOD Studio AppImage (Qt xcb plugin) expects this from the host
         - libatomic                # FMOD Studio links against libatomic.so.1; not bundled in its AppImage
         - fuse-libs                # libfuse2, so AppImages can run directly without --appimage-extract-and-run
+        - tailscale                # Tailnet access (e.g. remote Rex servers); run `sudo tailscale up` once to sign in
 
   # Not wanted: Noctalia and foot replace these. Kept as a separate module so the
   # install step above can't pull them back in as weak deps (absent ones are a no-op).
@@ -74,6 +75,7 @@ modules:
         - greetd
         - nix.mount
         - nix-daemon.socket
+        - tailscaled
     user:
       enabled:
         - hylu-setup.service       # First-login hylu-nix/home-manager setup
